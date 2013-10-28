@@ -1,13 +1,12 @@
-package WebService::PlayaEvents;
+=pod
 
-use 5.010;
-use Mouse;
+=head1 NAME
 
-# ABSTRACT: WebService::PlayaEvents - an interface to the burning man PlayaEvents API using Web::API
+WebService::PlayaEvents - WebService::PlayaEvents - an interface to the burning man PlayaEvents API using Web::API
 
-# VERSION
+=head1 VERSION
 
-with 'Web::API';
+version 0.1
 
 =head1 SYNOPSIS
 
@@ -43,74 +42,21 @@ Please refer to the API documentation at L<http://playaevents.burningman.com/api
 
 =head2 list_tstreet
 
-=cut
-
-has 'commands' => (
-    is      => 'rw',
-    default => sub {
-        {
-            # events
-            list_events =>
-                { path => 'event', optional => [ 'start_time', 'end_time' ], },
-            get_event => { path => 'event/:id' },
-
-            # camps
-            list_camps => { path => 'camp' },
-            get_camp   => { path => 'camp/:id' },
-
-            # art installations
-            list_art => { path => 'art' },
-            get_art  => { path => 'art/:id' },
-
-            # street names
-            list_cstreet => { path => 'cstreet' },
-            list_tstreet => { path => 'tstreet' }, };
-    },
-);
-
-has 'year' => (
-    is      => 'rw',
-    isa     => 'Int',
-    lazy    => 1,
-    default => sub { 2013 },
-);
-
 =head1 INTERNALS
-
-=cut
-
-sub commands {
-    my ($self) = @_;
-    return $self->commands;
-}
 
 =head2 BUILD
 
 basic configuration for the client API happens usually in the BUILD method when using Web::API
 
-=cut
-
-sub BUILD {
-    my ($self) = @_;
-
-    $self->user_agent(__PACKAGE__ . ' ' . $WebService::PlayaEvents::VERSION);
-    $self->content_type('application/json');
-    $self->base_url('http://playaevents.burningman.com/api/0.2/' . $self->year);
-
-    return $self;
-}
-
 =head1 BUGS
 
 Please report any bugs or feature requests on GitHub's issue tracker L<https://github.com/nupfel/WebService-PlayaEvents/issues>.
-
 
 =head1 SUPPORT
 
 You can find documentation for this module with the perldoc command.
 
     perldoc WebService::PlayaEvents
-
 
 You can also look for information at:
 
@@ -134,6 +80,15 @@ L<http://cpanratings.perl.org/d/WebService::PlayaEvents>
 
 =back
 
-=cut
+=head1 AUTHOR
 
-1;    # End of WebService::PlayaEvents
+Tobias Kirschstein <lev@cpan.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is Copyright (c) 2013 by Tobias Kirschstein.
+
+This is free software, licensed under:
+
+  The (three-clause) BSD License
+
