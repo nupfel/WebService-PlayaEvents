@@ -72,7 +72,7 @@ has 'year' => (
     is      => 'rw',
     isa     => 'Int',
     lazy    => 1,
-    dafault => sub { 2013 },
+    default => sub { 2013 },
 );
 
 =head1 INTERNALS
@@ -96,7 +96,7 @@ sub BUILD {
     $self->user_agent(__PACKAGE__ . ' ' . $WebService::PlayaEvents::VERSION);
     $self->content_type('application/json');
     $self->base_url(
-        'https://playaevents.burningman.com/api/0.2/' . $self->year);
+        'http://playaevents.burningman.com/api/0.2/' . $self->year);
 
     return $self;
 }
